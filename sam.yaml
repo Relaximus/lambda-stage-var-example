@@ -6,6 +6,13 @@ Globals:
     EndpointConfiguration: REGIONAL
 
 Resources:
+  SpringLambdaAPI:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: Prod
+      Variables:
+        webhookUrl: 'test' #!Sub '${SpringLambdaAPI}.execute-api.${AWS::Region}.amazonaws.com'
+
   SpringLambdaFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -19,6 +26,7 @@ Resources:
         GetResource:
           Type: Api
           Properties:
+            RestApiId: SpringLambdaAPI
             Path: /{proxy+}
             Method: any
 

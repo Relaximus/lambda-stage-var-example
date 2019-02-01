@@ -11,7 +11,7 @@ import java.util.Map;
 @RestController
 @EnableWebMvc
 public class PingController {
-    static String MY_URL = "my url";
+    public static String MY_URL = "my url";
 
     @RequestMapping(path = "/ping", method = RequestMethod.GET)
     public Map<String, String> ping() {
