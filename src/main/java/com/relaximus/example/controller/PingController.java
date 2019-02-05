@@ -11,13 +11,13 @@ import java.util.Map;
 @RestController
 @EnableWebMvc
 public class PingController {
-    public static String MY_URL = "my url";
+    public static String MY_URL = "my-url";
 
     @RequestMapping(path = "/ping", method = RequestMethod.GET)
     public Map<String, String> ping() {
         Map<String, String> pong = new HashMap<>();
         pong.put("pong", "Hello, World!");
-        pong.put("my-url", MY_URL);
+        pong.put("my-url", "https://"+MY_URL);
         return pong;
     }
 }

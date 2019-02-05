@@ -11,7 +11,7 @@ Resources:
     Properties:
       StageName: Prod
       Variables:
-        webhookUrl: 'test' #!Sub '${SpringLambdaAPI}.execute-api.${AWS::Region}.amazonaws.com'
+        webhookUrl: !Sub '${SpringLambdaAPI}.execute-api.${AWS::Region}.amazonaws.com/Prod/ping'
 
   SpringLambdaFunction:
     Type: AWS::Serverless::Function
@@ -26,13 +26,13 @@ Resources:
         GetResource:
           Type: Api
           Properties:
-            RestApiId: SpringLambdaAPI
+            RestApiId: !Ref SpringLambdaAPI
             Path: /{proxy+}
             Method: any
 
 Outputs:
   SpringLambdaApi:
     Description: URL for application
-    Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/ping'
+    Value: !Sub 'https://${SpringLambdaAPI}.execute-api.${AWS::Region}.amazonaws.com/Prod/ping'
     Export:
       Name: SpringLambdaApi
